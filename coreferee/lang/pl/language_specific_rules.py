@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import plwn
+from functools import lru_cache
+
 from string import punctuation
 from spacy.tokens import Token
 from ...rules import RulesAnalyzer
@@ -41,10 +44,93 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
 
     clause_root_pos = ('VERB', 'AUX', 'ADJ')
 
+    wordnet = plwn.load('/home/mwot/plwn-3.0-v5.db')
+
     @staticmethod
     def is_reflexive_possessive_pronoun(token:Token) -> bool:
         return token.pos_ == 'DET' and token.tag_ == 'ADJ' and token.lemma_[:4] in (
             'swój', 'swoj', 'swoi')
+
+    @lru_cache(maxsize = 10000)
+    def get_lexical_units(self, lemma):
+        units = self.wordnet.lexical_units(lemma)
+        return units
+
+    def get_synonyms(self, lexical_units):
+        synsets = [lexical_unit.synset for lexical_unit in lexical_units]
+        synonym_units = []
+        for synset in synsets:
+            synonym_units.extend(synset.lexical_units)
+
+        synonym_lemmas = set([u.lemma for u in synonym_units])
+        return synonym_lemmas
+
+    def is_wordnet_matched(self, referred, referring):
+        referred_units = self.get_lexical_units(referred.lemma_)
+        synonyms = self.get_synonyms(referred_units) 
+        if referring.lemma_ in synonyms:
+            return True
+        return False 
+
+    def is_potential_coreferring_noun_pair(self, referred:Token, referring:Token) -> bool:
+        """ Returns *True* if *referred* and *referring* are potentially coreferring nouns.
+            The method presumes that *is_independent_noun(token)* has
+            already returned *True* for both *referred* and *referring* and that
+            *referred* precedes *referring* within the document.
+        """
+        if len(referred.text) == 1 and len(referring.text) == 1:
+            return False # get rid of copyright signs etc.
+
+        if referred.pos_ not in self.noun_pos or referring.pos_ not in self.noun_pos:
+            return False
+
+        if referring in referred._.coref_chains.temp_dependent_siblings:
+            return False
+
+        if referring._.coref_chains.temp_governing_sibling is not None and \
+                referring._.coref_chains.temp_governing_sibling == \
+                referred._.coref_chains.temp_governing_sibling:
+            return False
+
+        # If *referred* and *referring* are names that potentially consist of several words,
+        # the text of *referring* must correspond to the end of the text of *referred*
+        # e.g. 'Richard Paul Hudson' -> 'Hudson'
+        referred_propn_subtree = self.get_propn_subtree(referred)
+        if referring in referred_propn_subtree:
+            return False
+        if len(referred_propn_subtree) > 0:
+            referring_propn_subtree = self.get_propn_subtree(referring)
+            if len(referring_propn_subtree) > 0 and \
+                    ' '.join(t.text for t in referred_propn_subtree).endswith(
+                    ' '.join(t.text for t in referring_propn_subtree)):
+                return True
+            if len(referring_propn_subtree) > 0 and \
+                    ' '.join(t.lemma_.lower() for t in referred_propn_subtree).endswith(
+                    ' '.join(t.lemma_.lower() for t in referring_propn_subtree)):
+                return True
+
+        # e.g. 'BMW' -> 'the company'
+        if referring.lemma_.lower() in self.reverse_entity_noun_dictionary and \
+                referred.pos_ in self.propn_pos and referred.ent_type_ == \
+                self.reverse_entity_noun_dictionary[referring.lemma_.lower()] and \
+                self.is_potentially_definite(referring):
+            return True
+        ### ADDITION
+        print(referred, referring)
+        if self.is_wordnet_matched(referred, referring):
+            return True
+        ### /ADDITION
+        if not self.is_potentially_referring_back_noun(referring):
+            return False
+        if not self.is_potentially_introducing_noun(referred) and not \
+                self.is_potentially_referring_back_noun(referred):
+            return False
+        if referred.lemma_ == referring.lemma_ and \
+                referred.morph.get(self.number_morph_key) == \
+                referring.morph.get(self.number_morph_key):
+            return True
+        return False
+
 
     def get_dependent_siblings(self, token:Token) -> list:
 
