@@ -115,11 +115,8 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
                 self.reverse_entity_noun_dictionary[referring.lemma_.lower()] and \
                 self.is_potentially_definite(referring):
             return True
-        ### ADDITION
-        print(referred, referring)
         if self.is_wordnet_matched(referred, referring):
             return True
-        ### /ADDITION
         if not self.is_potentially_referring_back_noun(referring):
             return False
         if not self.is_potentially_introducing_noun(referred) and not \
