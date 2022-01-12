@@ -33,10 +33,22 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
     adverbial_clause_deps = ('ccomp', 'dep', 'advcl', 'cop')
 
     entity_noun_dictionary = {
-        'persName': ['człowiek', 'osoba', 'mężczyzna', 'kobieta'],
-        'placeName': ['miejsce', 'miasto', 'państwo', 'kraj'],
-        'orgName': ['firma', 'przedsiębiorstwo', 'organizacja', 'zespół', 'przedsięwzięcie']
+        'persName': ['człowiek', 'osoba', 'mężczyzna', 'kobieta', 'pan',
+                     'dziecko','pani','rodzina','postać','dziewczyna',
+                     'dziewczynka','chłopiec','chłopak'],
+        'placeName': ['miejsce', 'miasto', 'państwo', 'kraj', 'gmina',
+                      'ulica','powiat','wieś', 'województwo','miejscowość',
+                      'dzielnica', 'adres'],
+        'geogName': ['obszar','region','okolica','rejon','strefa'],
+        'orgName': ['firma', 'przedsiębiorstwo', 'organizacja', 'zespół',
+                    'przedsięwzięcie', 'grupa','związek','klub','spółka',
+                    'drużyna','partia','instytucja','stowarzyszenie',
+                    'spółdzielnia','instytut', 'urząd'],
+        'time' : ['chwila','godzina','moment','minuta', 'pora', 'czas'],
+        'date' : ['rok','czas','dzień','miesiąc','okres','tydzień','wiek',
+                  'święto', 'noc','data','termin','pora'],
     }
+
 
     quote_tuples = [("'", "'"), ('"', '"'), ('„', '“'), ('‚', '‘'), ('«', '»'), ('»', '«')]
 
@@ -67,10 +79,10 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
 
     def is_wordnet_matched(self, referred, referring):
         referred_units = self.get_lexical_units(referred.lemma_)
-        synonyms = self.get_synonyms(referred_units) 
+        synonyms = self.get_synonyms(referred_units)
         if referring.lemma_ in synonyms:
             return True
-        return False 
+        return False
 
     def is_potential_coreferring_noun_pair(self, referred:Token, referring:Token) -> bool:
         """ Returns *True* if *referred* and *referring* are potentially coreferring nouns.
