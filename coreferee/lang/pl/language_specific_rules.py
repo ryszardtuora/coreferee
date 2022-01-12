@@ -44,7 +44,7 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
 
     clause_root_pos = ('VERB', 'AUX', 'ADJ')
 
-    wordnet = plwn.load('/home/mwot/plwn-3.0-v5.db')
+    wordnet = plwn.load('/plwn.sqlite')
 
     @staticmethod
     def is_reflexive_possessive_pronoun(token:Token) -> bool:
