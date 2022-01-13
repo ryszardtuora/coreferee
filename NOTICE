@@ -1,4 +1,11 @@
-coreferencer
+# COREFERENCER LICENSE
+
+Copyright (c) 2022  Institute of Computer Science, Polish Academy of Sciences (IPI PAN) <http://zil.ipipan.waw.pl>
+All rights reserved.
+
+Licenced to NASK, contract number 57363
+
+Based on the coreferee system licensed by:
 Copyright (C) 2021 msg systems ag, Germany
 
 Additional licenses and attributions apply to word lists and training data used for specific languages and are documented within the /coreferencer/lang/*/data directories.
