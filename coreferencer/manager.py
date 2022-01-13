@@ -29,7 +29,7 @@ from .errors import LanguageNotSupportedError, ModelNotSupportedError, \
     VectorsModelNotInstalledError, VectorsModelHasWrongVersionError, \
     MultiprocessingParsingNotSupportedError
 
-COMMON_MODELS_PACKAGE_NAMEPART = 'coreferencer_model_'
+COMMON_MODELS_PACKAGE_NAMEPART = 'coreferee_model_'
 
 FEATURE_TABLE_FILENAME = 'feature_table.bin'
 
