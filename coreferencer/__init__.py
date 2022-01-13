@@ -19,4 +19,4 @@ import warnings
 warnings.filterwarnings("ignore", message=r"\[W007\]", category=UserWarning)
 
 import coreferencer.manager
-coreferencer.manager.coreferencerBroker.set_extensions()
+coreferencer.manager.CoreferencerBroker.set_extensions()

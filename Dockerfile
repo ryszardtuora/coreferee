@@ -9,8 +9,8 @@ RUN python3 -m pip install --upgrade pip setuptools wheel build && \
 
 RUN wget https://minio.clarin-pl.eu/public/models/plwn_api_dumps/plwn_dump_27-03-2018.sqlite -O plwn.sqlite
 
-RUN git clone https://github.com/ryszardtuora/coreferee.git && \
-  python3 -m build coreferencer && \
-  python3 -m pip install coreferencer/dist/coreferencer-1.1.2-py3-none-any.whl && \
+RUN git clone https://github.com/ryszardtuora/coreferee.git --branch coreferencer && \
+  python3 -m build coreferee && \
+  python3 -m pip install coreferee/dist/coreferencer-1.1.2-py3-none-any.whl && \
   python3 -m coreferencer install pl
 
