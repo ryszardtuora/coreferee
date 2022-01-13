@@ -1,3 +1,4 @@
+import argparse
 from typing import List
 from pathlib import Path
 from spacy.tokens import Doc
@@ -8,17 +9,20 @@ import spacy
 nlp = spacy.load('pl_core_news_lg')
 nlp.add_pipe('coreferee')
 
-TEST_PATH = Path(r"C:\Users\PCC-1.5-BRAT-split\test")
-
 
 class MentionEvaluator:
     def __init__(self):
         self.tp, self.fp, self.fn = 0, 0, 0
 
     def update(self, predicted_mentions, gold_mentions):
+        print({
+            'p': predicted_mentions,
+            'g': gold_mentions,
+            'intersect': predicted_mentions & gold_mentions,
+            'predicted - gold': predicted_mentions - gold_mentions
+        })
         predicted_mentions = set(predicted_mentions)
         gold_mentions = set(gold_mentions)
-
         self.tp += len(predicted_mentions & gold_mentions)
         self.fp += len(predicted_mentions - gold_mentions)
         self.fn += len(gold_mentions - predicted_mentions)
@@ -50,7 +54,7 @@ def mentions_from_doc(doc: Doc) -> List[str]:
         for mention in chain:
             mentions.append(
                 ' '.join(
-                    [str(doc[ind] for ind in mention.token_indexes)]
+                    [str(doc[ind]) for ind in mention.token_indexes]
                 )
             )
     return mentions
@@ -67,7 +71,8 @@ def eval_coreferee(test_dir: Path):
             doc = nlp(text)
             predicted_mentions = mentions_from_doc(doc)
             gold_mentions = load_gold_from_ann(p.with_suffix('.ann'))
-            me.update(predicted_mentions, gold_mentions)
+            gold_mentions_str = [mention[1] for mention in gold_mentions.values()]
+            me.update(predicted_mentions, gold_mentions_str)
     return {
         'mention_f1': me.get_f1(),
         'mention_pr': me.get_precision(),
@@ -88,4 +93,15 @@ def load_gold_from_ann(ann_file: Path):
     return mentions
 
 
-print(eval_coreferee(TEST_PATH))
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "test_dir_path",
+    help="""
+    """
+)
+args = parser.parse_args()
+print(
+    eval_coreferee(
+        Path(args.test_dir_path)
+    )
+)
