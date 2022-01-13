@@ -82,7 +82,7 @@ class ChainHolder():
             return None
         return sorted(list(resolved_set))
 
-    @srsly.msgpack_encoders("coreferee_chain_holder")
+    @srsly.msgpack_encoders("coreferencer_chain_holder")
     def serialize_obj(obj, chain=None):
         if isinstance(obj, ChainHolder):
             serialized_chain_holder = []
@@ -91,16 +91,16 @@ class ChainHolder():
                     [(mention.token_indexes, mention.pretty_representation)
                     for mention in working_chain.mentions],
                     working_chain.most_specific_mention_index))
-            return {'__coreferee_chain_holder__': serialized_chain_holder}
+            return {'__coreferencer_chain_holder__': serialized_chain_holder}
         return obj if chain is None else chain(obj)
 
-    @srsly.msgpack_decoders("coreferee_chain_holder")
+    @srsly.msgpack_decoders("coreferencer_chain_holder")
     def deserialize_obj(obj, chain=None):
-        if '__coreferee_chain_holder__' in obj:
+        if '__coreferencer_chain_holder__' in obj:
             chain_holder = ChainHolder()
             chain_holder.chains = []
             for index, (chain_representation, most_specific_mention_index) in \
-                    enumerate(obj['__coreferee_chain_holder__']):
+                    enumerate(obj['__coreferencer_chain_holder__']):
                 mentions = []
                 for (token_indexes, pretty_representation) in chain_representation:
                     mention = Mention()

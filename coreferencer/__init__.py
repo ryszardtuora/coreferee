@@ -12,26 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class CorefereeError(Exception):
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-    def __init__(self, text:str=''):
-        super().__init__()
-        self.text = text
+import warnings
+warnings.filterwarnings("ignore", message=r"\[W007\]", category=UserWarning)
 
-    def __str__(self) -> str:
-        return self.text
-
-class LanguageNotSupportedError(CorefereeError):
-    pass
-
-class ModelNotSupportedError(CorefereeError):
-    pass
-
-class VectorsModelNotInstalledError(CorefereeError):
-    pass
-
-class VectorsModelHasWrongVersionError(CorefereeError):
-    pass
-
-class MultiprocessingParsingNotSupportedError(CorefereeError):
-    pass
+import coreferencer.manager
+coreferencer.manager.coreferencerBroker.set_extensions()

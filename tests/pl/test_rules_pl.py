@@ -14,10 +14,10 @@
 
 import unittest
 import spacy
-import coreferee
-from coreferee.rules import RulesAnalyzerFactory
-from coreferee.test_utils import get_nlps
-from coreferee.data_model import Mention
+import coreferencer
+from coreferencer.rules import RulesAnalyzerFactory
+from coreferencer.test_utils import get_nlps
+from coreferencer.data_model import Mention
 
 class PolishRulesTest(unittest.TestCase):
 

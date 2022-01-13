@@ -44,7 +44,7 @@ class RulesAnalyzerFactory:
         with lock:
             if language not in language_to_rules:
                 language_specific_rules_module = importlib.import_module(
-                    '.'.join(('.lang', nlp.meta['lang'], 'language_specific_rules')), 'coreferee')
+                    '.'.join(('.lang', nlp.meta['lang'], 'language_specific_rules')), 'coreferencer')
                 rules_analyzer = language_specific_rules_module.LanguageSpecificRulesAnalyzer()
                 language_to_rules[language] = rules_analyzer
                 read_in_data_files(language, rules_analyzer)

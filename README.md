@@ -1,4 +1,4 @@
-Coreferee
+coreferencer
 =========
 Author: <a href="mailto:richard@explosion.ai">Richard Paul Hudson, msg systems ag</a>
 
@@ -38,7 +38,7 @@ Author: <a href="mailto:richard@explosion.ai">Richard Paul Hudson, msg systems a
 
 Coreferences are situations where two or more words within a text refer to the same entity, e.g. *__John__ went home because __he__ was tired*. Resolving coreferences is an important general task within the natural language processing field.
 
-Coreferee is a Python 3 library (tested with version 3.9.5) that is used together with [spaCy](https://spacy.io/) (tested with version 3.1.2) to resolve coreferences within English, French, German and Polish texts. It is designed so that it is easy to add support for new languages. It uses a mixture of neural networks and programmed rules.
+coreferencer is a Python 3 library (tested with version 3.9.5) that is used together with [spaCy](https://spacy.io/) (tested with version 3.1.2) to resolve coreferences within English, French, German and Polish texts. It is designed so that it is easy to add support for new languages. It uses a mixture of neural networks and programmed rules.
 
 <a id="getting-started"></a>
 #### 1.2 Getting started
@@ -46,25 +46,25 @@ Coreferee is a Python 3 library (tested with version 3.9.5) that is used togethe
 <a id="getting-started-en"></a>
 ##### 1.2.1 English
 
-Presuming you have already installed [spaCy](https://spacy.io/) and one of the English spacy models, install Coreferee from the command line by typing:
+Presuming you have already installed [spaCy](https://spacy.io/) and one of the English spacy models, install coreferencer from the command line by typing:
 
 ```
-python3 -m pip install coreferee
-python3 -m coreferee install en
+python3 -m pip install coreferencer
+python3 -m coreferencer install en
 ```
 
 Note that:
 
 - the required command may be `python` rather than `python3` on some operating systems;
-- in order to use the transformer-based spaCy model `en_core_web_trf` with Coreferee, you will need to install the spaCy model `en_core_web_lg` as well (see the explanation [here](#model-performance)).
+- in order to use the transformer-based spaCy model `en_core_web_trf` with coreferencer, you will need to install the spaCy model `en_core_web_lg` as well (see the explanation [here](#model-performance)).
 
 Then open a Python prompt (type `python3` or `python` at the command line):
 
 ```
->>> import coreferee, spacy
+>>> import coreferencer, spacy
 >>> nlp = spacy.load('en_core_web_trf')
->>> nlp.add_pipe('coreferee')
-<coreferee.manager.CorefereeBroker object at 0x000002DE8E9256D0>
+>>> nlp.add_pipe('coreferencer')
+<coreferencer.manager.CoreferencerBroker object at 0x000002DE8E9256D0>
 >>>
 >>> doc = nlp("Although he was very busy with his work, Peter had had enough of it. He and his wife decided they needed a holiday. They travelled to Spain because they loved the country very much.")
 >>>
@@ -86,11 +86,11 @@ Then open a Python prompt (type `python3` or `python` at the command line):
 <a id="getting-started-fr"></a>
 ##### 1.2.2 French
 
-Presuming you have already installed [spaCy](https://spacy.io/) and one of the French spacy models, install Coreferee from the command line by typing:
+Presuming you have already installed [spaCy](https://spacy.io/) and one of the French spacy models, install coreferencer from the command line by typing:
 
 ```
-python3 -m pip install coreferee
-python3 -m coreferee install fr
+python3 -m pip install coreferencer
+python3 -m coreferencer install fr
 ```
 
 Note that the required command may be `python` rather than `python3` on some operating systems.
@@ -98,10 +98,10 @@ Note that the required command may be `python` rather than `python3` on some ope
 Then open a Python prompt (type `python3` or `python` at the command line):
 
 ```
->>> import coreferee, spacy
+>>> import coreferencer, spacy
 >>> nlp = spacy.load('fr_core_news_lg')
->>> nlp.add_pipe('coreferee')
-<coreferee.manager.CorefereeBroker object at 0x000001F556B4FF10>
+>>> nlp.add_pipe('coreferencer')
+<coreferencer.manager.CoreferencerBroker object at 0x000001F556B4FF10>
 >>>
 >>> doc = nlp("Même si elle était très occupée par son travail, Julie en avait marre. Alors, elle et son mari décidèrent qu'ils avaient besoin de vacances. Ils allèrent en Espagne car ils adoraient le pays")
 >>>
@@ -123,11 +123,11 @@ Then open a Python prompt (type `python3` or `python` at the command line):
 <a id="getting-started-de"></a>
 ##### 1.2.3 German
 
-Presuming you have already installed [spaCy](https://spacy.io/) and one of the German spacy models, install Coreferee from the command line by typing:
+Presuming you have already installed [spaCy](https://spacy.io/) and one of the German spacy models, install coreferencer from the command line by typing:
 
 ```
-python3 -m pip install coreferee
-python3 -m coreferee install de
+python3 -m pip install coreferencer
+python3 -m coreferencer install de
 ```
 
 Note that the required command may be `python` rather than `python3` on some operating systems.
@@ -135,10 +135,10 @@ Note that the required command may be `python` rather than `python3` on some ope
 Then open a Python prompt (type `python3` or `python` at the command line):
 
 ```
->>> import coreferee, spacy
+>>> import coreferencer, spacy
 >>> nlp = spacy.load('de_core_news_lg')
->>> nlp.add_pipe('coreferee')
-<coreferee.manager.CorefereeBroker object at 0x0000026E84C63B50>
+>>> nlp.add_pipe('coreferencer')
+<coreferencer.manager.CoreferencerBroker object at 0x0000026E84C63B50>
 >>>
 >>> doc = nlp("Weil er mit seiner Arbeit sehr beschäftigt war, hatte Peter davon genug. Er und seine Frau haben entschieden, dass ihnen ein Urlaub gut tun würde. Sie sind nach Spanien gefahren, weil ihnen das Land sehr gefiel.")
 >>>
@@ -160,11 +160,11 @@ Then open a Python prompt (type `python3` or `python` at the command line):
 <a id="getting-started-pl"></a>
 ##### 1.2.4 Polish
 
-Presuming you have already installed [spaCy](https://spacy.io/) and one of the Polish spacy models, install Coreferee from the command line by typing:
+Presuming you have already installed [spaCy](https://spacy.io/) and one of the Polish spacy models, install coreferencer from the command line by typing:
 
 ```
-python3 -m pip install coreferee
-python3 -m coreferee install pl
+python3 -m pip install coreferencer
+python3 -m coreferencer install pl
 ```
 
 Note that the required command may be `python` rather than `python3` on some operating systems.
@@ -172,10 +172,10 @@ Note that the required command may be `python` rather than `python3` on some ope
 Then open a Python prompt (type `python3` or `python` at the command line):
 
 ```
->>> import coreferee, spacy
+>>> import coreferencer, spacy
 >>> nlp = spacy.load('pl_core_news_lg')
->>> nlp.add_pipe('coreferee')
-<coreferee.manager.CorefereeBroker object at 0x0000027304C63B50>
+>>> nlp.add_pipe('coreferencer')
+<coreferencer.manager.CoreferencerBroker object at 0x0000027304C63B50>
 >>>
 >>> doc = nlp("Ponieważ bardzo zajęty był swoją pracą, Janek miał jej dość. Postanowili z jego żoną, że potrzebują wakacji. Pojechali do Hiszpanii, bo bardzo im się ten kraj podobał.")
 >>>
@@ -199,11 +199,11 @@ Then open a Python prompt (type `python3` or `python` at the command line):
 
 Handling coreference resolution successfully requires training corpora that have been manually annotated with coreferences. The [state of the art in coreference resolution](https://paperswithcode.com/sota/coreference-resolution-on-conll-2012) is progressing rapidly, but is largely focussed on techniques that require training corpora that are larger than what is available for most languages and software developers. The [CONLL 2012 training corpus](https://cemantix.org/conll/2012/task-description.html), which is most widely used, has the following restrictions:
 
-- CONLL 2012 covers English, Chinese and Arabic; there is nothing of comparable size for most other languages. For example, the [corpus](#model-performance) we used to train Coreferee for German is around a tenth of the size of CONLL 2012;
+- CONLL 2012 covers English, Chinese and Arabic; there is nothing of comparable size for most other languages. For example, the [corpus](#model-performance) we used to train coreferencer for German is around a tenth of the size of CONLL 2012;
 
 - CONLL 2012 is not publicly available and has a license that precludes non-members of the Linguistic Data Consortium from using models commercially that CONLL 2012 was used to train.
 
-Earlier versions of spaCy had an extension, [Neuralcoref](https://github.com/huggingface/neuralcoref), that was excellent but that was never made publicly available for any language other than English. The aim of Coreferee, on the other hand, is to get coreference resolution working for a variety of languages: our focus is less on necessarily achieving the best possible precision and recall for English than on enabling the functionality to be reproduced for new languages as easily and as quickly as possible. Because training data is in such short supply for most languages and is very effort-intensive to produce, it is important to use what is available as effectively as possible.
+Earlier versions of spaCy had an extension, [Neuralcoref](https://github.com/huggingface/neuralcoref), that was excellent but that was never made publicly available for any language other than English. The aim of coreferencer, on the other hand, is to get coreference resolution working for a variety of languages: our focus is less on necessarily achieving the best possible precision and recall for English than on enabling the functionality to be reproduced for new languages as easily and as quickly as possible. Because training data is in such short supply for most languages and is very effort-intensive to produce, it is important to use what is available as effectively as possible.
 
 There are three essential strategies that human readers employ to recognise coreferences within a text:
 
@@ -213,25 +213,25 @@ There are three essential strategies that human readers employ to recognise core
 
 3) Semantic restrictions, i.e. which entities can realistically do what to which entities in the world being described. For example, in the sentence *The child saddled __her__ up*, a reader's experience of the world will make it clear that *her* must refer to a horse.
 
-With unlimited training data, it would be possible to train a system to employ all three strategies effectively from first principles using word vectors. The features of Coreferee that allow effective learning with the limited training data that is available are:
+With unlimited training data, it would be possible to train a system to employ all three strategies effectively from first principles using word vectors. The features of coreferencer that allow effective learning with the limited training data that is available are:
 
-- Strategy 1) is covered by hardcoded rules for each language that the system is then not required to learn from the training data. Because detailed knowledge of the grammar of a specific natural language is a separate skill set from knowledge of machine learning, the two concerns have been fully separated in Coreferee: rules are covered in a separate module from tendencies. This means that a model for a new language can be generated by a competent Python programmer with no knowledge of machine learning or neural networks;
+- Strategy 1) is covered by hardcoded rules for each language that the system is then not required to learn from the training data. Because detailed knowledge of the grammar of a specific natural language is a separate skill set from knowledge of machine learning, the two concerns have been fully separated in coreferencer: rules are covered in a separate module from tendencies. This means that a model for a new language can be generated by a competent Python programmer with no knowledge of machine learning or neural networks;
 
 - Because the pragmatic tendencies for strategy 2) are very complex and only partially understood by linguists, machine learning and neural networks represent the only realistic way of tackling them. In order to reduce the amount of training data required for neural networks to learn effectively, the syntactic and morphological information supplied by the spaCy models, which have typically been trained with considerably more training data than will be available for coreference resolution, is used as input to neural networks alongside the standard [word vectors](#the-neural-ensemble).
 
-- Especially with limited training data but probably even with the largest available training datasets, it is unlikely that a system will learn more than the very simplest tendencies for strategy 3). However, making word vectors available to neural networks ensures that Coreferee can make use of whatever tendencies are discernable.
+- Especially with limited training data but probably even with the largest available training datasets, it is unlikely that a system will learn more than the very simplest tendencies for strategy 3). However, making word vectors available to neural networks ensures that coreferencer can make use of whatever tendencies are discernable.
 
-Coreferee started life to assist the [Holmes](https://github.com/msg-systems/holmes-extractor) project, which is used for information extraction and intelligent search. Coreferee is in no way dependent on Holmes, but this original aim has led to several design decisions that may seem somewhat atypical. Several of them could easily be altered by someone with a requirement to do so:
+coreferencer started life to assist the [Holmes](https://github.com/msg-systems/holmes-extractor) project, which is used for information extraction and intelligent search. coreferencer is in no way dependent on Holmes, but this original aim has led to several design decisions that may seem somewhat atypical. Several of them could easily be altered by someone with a requirement to do so:
 
-- A mention within Coreferee does not consist of a span, but rather of a single token or of a list of tokens that stand in a coordination relationship to one another.
+- A mention within coreferencer does not consist of a span, but rather of a single token or of a list of tokens that stand in a coordination relationship to one another.
 
-- Coreferee does not capture coreferences that are unambiguously evident from the structure of a sentence. For example, the identity of *he* and *doctor* in the sentence *__He__ was a __doctor__* is not reported by Coreferee because it can easily be derived from a simple analysis of the copular structure of the phrase.
+- coreferencer does not capture coreferences that are unambiguously evident from the structure of a sentence. For example, the identity of *he* and *doctor* in the sentence *__He__ was a __doctor__* is not reported by coreferencer because it can easily be derived from a simple analysis of the copular structure of the phrase.
 
 - Repetitions of first- and second-person pronouns (*__I__ was tired. __I__ went home*) are not captured as they add no value either for information extraction or for intelligent search.
 
-- Coreferee focusses heavily on anaphors (for English: pronouns). There is only relatively limited capture of coreference between noun phrases, and it is entirely rule-based. (In turn, however, this serves the aim of working with limited training data: noun-phrase coreference is a more exacting task than anaphor resolution.)
+- coreferencer focusses heavily on anaphors (for English: pronouns). There is only relatively limited capture of coreference between noun phrases, and it is entirely rule-based. (In turn, however, this serves the aim of working with limited training data: noun-phrase coreference is a more exacting task than anaphor resolution.)
 
-- Because search performance is much more important for Holmes than document parsing performance, Coreferee performs all analysis eagerly as each document passes through the pipe.
+- Because search performance is much more important for Holmes than document parsing performance, coreferencer performs all analysis eagerly as each document passes through the pipe.
 
 <a id="facts-and-figures"></a>
 #### 1.4 Facts and figures
@@ -247,9 +247,9 @@ Coreferee started life to assist the [Holmes](https://github.com/msg-systems/hol
    <tr><td align="center">pl</td><td align="center">Polish</td><td align="center"><i>Wszedł <b>mój kolega</b>. Widzieliście, jaki <b>on</b> był szczęśliwy?</i><td align="center"><i>Wszedł <b>mój kolega</b>. Szczęśliwy <b>był</b>.<sup>1</sup></i></td><td align="center">-<sup>2</sup></td><td align="center">Three singular (grammatical genders) and two plural (natural genders) classes.</td><td align="center"><i><b>Piotr i Kasia</b></i></td><td align="center">1) <i><b>Piotr z Kasią</b> przyjechali do Warszawy</i>; <br>2)&nbsp;<i>Widziałem Piotra i <b>przyszli z Kasią</i></b></td></tr>
   </table>
 
-1. Only subject zero anaphors are covered. Object zero anaphors, e.g. <i>Wypiłeś <b>wodę</b>? Tak, <b>wypiłem.</b></i> are not in scope because they are mainly used colloquially and do not normally occur in the types of text for which [Coreferee is primarily designed](#background-information). Handling them would require creating or locating a detailed dictionary of verb valencies.
+1. Only subject zero anaphors are covered. Object zero anaphors, e.g. <i>Wypiłeś <b>wodę</b>? Tak, <b>wypiłem.</b></i> are not in scope because they are mainly used colloquially and do not normally occur in the types of text for which [coreferencer is primarily designed](#background-information). Handling them would require creating or locating a detailed dictionary of verb valencies.
 
-2. Polish has a restricted use of anaphoric prepositions in some formal registers, e.g. *Skończyło się to __dlań__ smutno*. Because the Polish spaCy models were trained on news texts, they do not recognise such prepositions, meaning that Coreferee cannot capture them either.  
+2. Polish has a restricted use of anaphoric prepositions in some formal registers, e.g. *Skończyło się to __dlań__ smutno*. Because the Polish spaCy models were trained on news texts, they do not recognise such prepositions, meaning that coreferencer cannot capture them either.  
 
 <a id="model-performance"></a>
 ##### 1.4.2 Model performance
@@ -263,15 +263,15 @@ Coreferee started life to assist the [Holmes](https://github.com/msg-systems/hol
   <tr><td align="center">pl</td><td align="center">Polish</td><td align="center"><a href="http://zil.ipipan.waw.pl/PolishCoreferenceCorpus">PCC</a></td><td align="center">548268</td><td align="center">-</td><td align="center">-</td><td align="center"><b>1681</b></td><td align="center"><b>73.92</b></td><td align="center">1672</td><td align="center">71.98</td><td align="center">-</td><td align="center">-</td></tr>
 </table>
 
-Coreferee produces a range of neural-network models for each language corresponding to the various spaCy models for that language. The [neural network inputs](#the-neural-ensemble) include word vectors. With `_sm` (small) models, both spaCy and Coreferee use context-sensitive tensors as an alternative to word vectors. `_trf` (transformer-based) models, on the other hand, do not use or offer word vectors at all. To remedy this problem, the model configuration files (`config.cfg` in the directory for each language) allow a **vectors model** to be specified for use when a main model does not have its own vectors. Coreferee then combines the linguistic information generated by the main model with vector information returned for the individual words in each document by the vectors model.
+coreferencer produces a range of neural-network models for each language corresponding to the various spaCy models for that language. The [neural network inputs](#the-neural-ensemble) include word vectors. With `_sm` (small) models, both spaCy and coreferencer use context-sensitive tensors as an alternative to word vectors. `_trf` (transformer-based) models, on the other hand, do not use or offer word vectors at all. To remedy this problem, the model configuration files (`config.cfg` in the directory for each language) allow a **vectors model** to be specified for use when a main model does not have its own vectors. coreferencer then combines the linguistic information generated by the main model with vector information returned for the individual words in each document by the vectors model.
 
-Because the Coreferee models are rather large (70GB-80GB for the group of models for a given language) and because many users will only be interested in one language, the group of models for a given language is installed using `python3 -m coreferee install` as demonstrated in the introduction. All Coreferee models are more or less the same size; a larger spaCy model does not equate to a larger Coreferee model. As the figures above demonstrate, the accuracy of Coreferee corresponds closely to the size of the underlying spaCy model, and users are urged to use the larger spaCy models. It is in any case unclear whether there is a situation in which it would make sense to use Coreferee with an `_sm` model as the Coreferee model would then be considerably larger than the spaCy model! As this discrepancy is especially extreme for the Polish models, Coreferee no longer supports `pl_core_news_sm` from version 1.1.0 onwards.
+Because the coreferencer models are rather large (70GB-80GB for the group of models for a given language) and because many users will only be interested in one language, the group of models for a given language is installed using `python3 -m coreferencer install` as demonstrated in the introduction. All coreferencer models are more or less the same size; a larger spaCy model does not equate to a larger coreferencer model. As the figures above demonstrate, the accuracy of coreferencer corresponds closely to the size of the underlying spaCy model, and users are urged to use the larger spaCy models. It is in any case unclear whether there is a situation in which it would make sense to use coreferencer with an `_sm` model as the coreferencer model would then be considerably larger than the spaCy model! As this discrepancy is especially extreme for the Polish models, coreferencer no longer supports `pl_core_news_sm` from version 1.1.0 onwards.
 
-Assessing and comparing the precision and recall of anaphor resolution algorithms is notoriously difficult. For one thing, two human annotators of the same data will not always agree (and, indeed, there are some cases where Coreferee and a training annotator disagree where Coreferee's interpretation seems the more plausible!) And the same algorithm may perform with wildly different accuracies with different test documents depending on how clearly the documents are written and how often there are competing interpretations of individual anaphors.
+Assessing and comparing the precision and recall of anaphor resolution algorithms is notoriously difficult. For one thing, two human annotators of the same data will not always agree (and, indeed, there are some cases where coreferencer and a training annotator disagree where coreferencer's interpretation seems the more plausible!) And the same algorithm may perform with wildly different accuracies with different test documents depending on how clearly the documents are written and how often there are competing interpretations of individual anaphors.
 
-Because Coreferee decides where there are anaphors to resolve (as opposed to what to resolve them to) in a purely rule-based fashion and because there is not necessarily a perfect correspondence between the types of anaphor these rules are aiming to capture and the types of anaphor covered by any given training corpus, a recall measure would not be meaningful. Instead, we compare the performance between spaCy models — and, during tuning, between different hyperparameter values — by counting the total **number of anaphors** that the rules find within the test documents as parsed by the spaCy model being used and that are also annotated with a coreference within the training data. The **accuracy** then expresses the percentage of these anaphors for which the coreference annotated by the corpus author is part of the chain(s) suggested by Coreferee. In situations where the training data specifies a chain C->B->A and B is a type of coreference that Coreferee is not aiming to capture, C->A is used as a valid training reference.
+Because coreferencer decides where there are anaphors to resolve (as opposed to what to resolve them to) in a purely rule-based fashion and because there is not necessarily a perfect correspondence between the types of anaphor these rules are aiming to capture and the types of anaphor covered by any given training corpus, a recall measure would not be meaningful. Instead, we compare the performance between spaCy models — and, during tuning, between different hyperparameter values — by counting the total **number of anaphors** that the rules find within the test documents as parsed by the spaCy model being used and that are also annotated with a coreference within the training data. The **accuracy** then expresses the percentage of these anaphors for which the coreference annotated by the corpus author is part of the chain(s) suggested by coreferencer. In situations where the training data specifies a chain C->B->A and B is a type of coreference that coreferencer is not aiming to capture, C->A is used as a valid training reference.
 
-Assessing the performance of a model requires test data that was not used for training. At the same time, however, Coreferee is explicitly designed for use in situations where training data is at a premium, and it seems a shame to waste the learning opportunity offered by specific training documents just to assess a model a single time. To enable valid testing and at the same time to maximize the use of training data, each model is trained twice. On the first run, around 80% of the data is used for training and the remaining 20% for testing. (In practice, these percentages can vary somewhat because individual documents cannot be split between the two groups.) This first model is then discarded and a second training run is carried out with the available data in its entirity. The assumption is that, because it is based on more training data, the performance of this second model can be presumed to be at least as good as the measured performance of the first model. The obvious drawback, however, is that there is no way of verifying this.
+Assessing the performance of a model requires test data that was not used for training. At the same time, however, coreferencer is explicitly designed for use in situations where training data is at a premium, and it seems a shame to waste the learning opportunity offered by specific training documents just to assess a model a single time. To enable valid testing and at the same time to maximize the use of training data, each model is trained twice. On the first run, around 80% of the data is used for training and the remaining 20% for testing. (In practice, these percentages can vary somewhat because individual documents cannot be split between the two groups.) This first model is then discarded and a second training run is carried out with the available data in its entirity. The assumption is that, because it is based on more training data, the performance of this second model can be presumed to be at least as good as the measured performance of the first model. The obvious drawback, however, is that there is no way of verifying this.
 
 Since coreference between noun phrases is restricted to a small number of cases captured by [simple rules](#noun-pair-detection), the model assessment figures presented here refer solely to [anaphor resolution](#anaphor-pair-analysis). When anaphor resolution accuracy is being assessed for a test document, noun pairs are detected and [added to chains](#building-the-chains) according to the standard rules, but they do not feature in the accuracy figures. On some rare occasions, however, they may have an indirect effect on accuracy by affecting the semantic considerations that determine which anaphors can be added to which chains.
 
@@ -280,7 +280,7 @@ Note that **Total words in training corpora** in the table above refers to 100% 
 <a id="interacting-with-the-data-model"></a>
 ### 2 Interacting with the data model
 
-Coreferee generates **Chain** objects where each chain is an ordered collection of **Mention** objects that have been analysed as referring to the same entity. Each mention holds references to one or more spaCy token indexes; a chain can have a maximum of one mention with more than one token (most often its leftmost mention). A given token index occurs in a maximum of two mentions; if it belongs to two mentions the mentions will belong to different chains and one of the mentions will contain multiple tokens.  All chains that refer to a given `Doc` or `Token` object are managed on a `ChainHolder` object which is accessed via `._.coref_chains`. Reproducing part of the example from the [introduction](#getting-started-en):
+coreferencer generates **Chain** objects where each chain is an ordered collection of **Mention** objects that have been analysed as referring to the same entity. Each mention holds references to one or more spaCy token indexes; a chain can have a maximum of one mention with more than one token (most often its leftmost mention). A given token index occurs in a maximum of two mentions; if it belongs to two mentions the mentions will belong to different chains and one of the mentions will contain multiple tokens.  All chains that refer to a given `Doc` or `Token` object are managed on a `ChainHolder` object which is accessed via `._.coref_chains`. Reproducing part of the example from the [introduction](#getting-started-en):
 
 ```
 >>> doc = nlp("Although he was very busy with his work, Peter had had enough of it. He and his wife decided they needed a holiday. They travelled to Spain because they loved the country very much.")
@@ -333,7 +333,7 @@ Chains and mentions can be navigated much as if they were lists:
 >>>
 ```
 
-A document with Coreferee annotations can be saved and loaded using the normal spaCy methods: the annotations survive the serialization and deserialization. To facilitate this, Coreferee does not store references to spaCy objects, but merely to token indexes. However, each class has a pretty representation designed for human consumption that contains information from the spaCy document and that is generated eagerly when the object is first instantiated. Additionally, the `ChainHolder` object has a `print()` method that prints its chains' pretty representations with one chain on each line:
+A document with coreferencer annotations can be saved and loaded using the normal spaCy methods: the annotations survive the serialization and deserialization. To facilitate this, coreferencer does not store references to spaCy objects, but merely to token indexes. However, each class has a pretty representation designed for human consumption that contains information from the spaCy document and that is generated eagerly when the object is first instantiated. Additionally, the `ChainHolder` object has a `print()` method that prints its chains' pretty representations with one chain on each line:
 
 ```
 >>> doc._.coref_chains
@@ -380,10 +380,10 @@ Each chain can also return the index number of the mention within it that is **m
 
 This information is used as the basis for the `resolve()` method shown in the [initial example](#getting-started-en): the method traverses multiple chains to find the most specific mention or mentions within the text that describe a given anaphor or noun phrase head.
 
-Note that a mention that heads a complex proper noun phrase only refers to the head of that phrase. Some users have expressed a requirement to retrieve all the tokens in such a phrase. Although this functionality is regarded as outside the main scope of Coreferee and is hence not available via the main data model, the information can be retrieved as follows:
+Note that a mention that heads a complex proper noun phrase only refers to the head of that phrase. Some users have expressed a requirement to retrieve all the tokens in such a phrase. Although this functionality is regarded as outside the main scope of coreferencer and is hence not available via the main data model, the information can be retrieved as follows:
 
 ```
-rules_analyzer = nlp_en.get_pipe('coreferee').annotator.rules_analyzer
+rules_analyzer = nlp_en.get_pipe('coreferencer').annotator.rules_analyzer
 rules_analyzer.get_propn_subtree(doc[1])
 ```
 
@@ -423,7 +423,7 @@ This information is used in a purely rule-based fashion to determine probable co
 <a id="building-the-chains"></a>
 ##### 3.1.3 Building the chains
 
-Coreferee goes through each document in natural reading order from left to right building up chains of anaphors and independent noun phrases. For each anaphor, the highest scoring interpretation as suggested by the neural ensemble is preferred. However, because the semantic (but not the syntactic) restrictions on anaphoric reference apply between all pairs formed by members of a chain rather than merely between adjacent members, it may turn out that the highest scoring interpretation is not permissible because it would lead to a semantically inconsistent chain. The interpretation with the next highest score is then tried, and so on until no interpretations remain.
+coreferencer goes through each document in natural reading order from left to right building up chains of anaphors and independent noun phrases. For each anaphor, the highest scoring interpretation as suggested by the neural ensemble is preferred. However, because the semantic (but not the syntactic) restrictions on anaphoric reference apply between all pairs formed by members of a chain rather than merely between adjacent members, it may turn out that the highest scoring interpretation is not permissible because it would lead to a semantically inconsistent chain. The interpretation with the next highest score is then tried, and so on until no interpretations remain.
 
 In the unusual situation that all suggested interpretations of a given anaphor have been found to be semantically impossible, it is likely that one of the interpretations of the preceding anaphors in the text was incorrect: authors do not normally use anaphors that do not refer to anything. Reading the text:
 
@@ -431,7 +431,7 @@ In the unusual situation that all suggested interpretations of a given anaphor h
  The woman looked down and saw Lesley. She stood up and greeted him.
  ```
 
- most readers will initially understand `she` as referring to `Lesley`. Only when one reaches the end of the sentence does it become clear that Lesley must be a man and that `she` actually refers to `the woman`. A quick test shows that Coreferee is capable of handling such ambiguity:
+ most readers will initially understand `she` as referring to `Lesley`. Only when one reaches the end of the sentence does it become clear that Lesley must be a man and that `she` actually refers to `the woman`. A quick test shows that coreferencer is capable of handling such ambiguity:
 
 ```
 >>> doc = nlp('The woman looked down and saw Lesley. She stood up and greeted her.')
@@ -454,7 +454,7 @@ The likelihood scores for [anaphoric pairs](#anaphor-pair-analysis) are calculat
 
 The inputs to each of the five networks consist of:
 
-1) A **feature map** for each member of the pair. As the first step in training, Coreferee goes through the entire training corpus and notes all the relevant morphological and syntactic information that relevant tokens, their syntactic head tokens and their syntactic children can have. This information is stored with the neural ensemble for each model as a **feature table**. The feature map for a given token (or list of tokens) is a oneshot representation with respect to the feature table.
+1) A **feature map** for each member of the pair. As the first step in training, coreferencer goes through the entire training corpus and notes all the relevant morphological and syntactic information that relevant tokens, their syntactic head tokens and their syntactic children can have. This information is stored with the neural ensemble for each model as a **feature table**. The feature map for a given token (or list of tokens) is a oneshot representation with respect to the feature table.
 
 2) A **position map** for each member of the pair capturing such information as its position within its sentence and its depth within the dependency tree generated for its sentence.
 
@@ -468,25 +468,25 @@ Perhaps somewhat unusually, when a vector is required to represent a coordinated
 
 The structure shared by each of the five networks in the ensemble is shown in the attached diagram:
 
-![Structure of an ensemble member](https://github.com/msg-systems/coreferee/blob/master/docs/nn_structure.png)
+![Structure of an ensemble member](https://github.com/msg-systems/coreferencer/blob/master/docs/nn_structure.png)
 
 Cross-linguistically, four training epochs were found to offer the best results; adding more training epochs caused the accuracy to start to tail off again owing to overfitting. Training for all relevant spaCy models for a given language takes between one and two hours on a high-end laptop.
 
 <a id="adding-support-for-a-new-language"></a>
 ### 4. Adding support for a new language
 
-One of the main design goals of Coreferee was to make it easy to add support for further languages. The prerequisites are:
+One of the main design goals of coreferencer was to make it easy to add support for further languages. The prerequisites are:
 
 - you will need to know the grammar of the language you are adding well enough to make detailed decisions about which coreferences are normal, which are marginally possible and which are impossible;
 - you will need to be able to program in Python.
 
-You should **not** need to get involved in the details of the neural ensemble; Coreferee should do that for you.
+You should **not** need to get involved in the details of the neural ensemble; coreferencer should do that for you.
 
 The steps involved are:
 
-1) Create a directory under `coreferee/lang/` with the same structure as the existing language-specific directories; it is probably easiest to copy one of them.
+1) Create a directory under `coreferencer/lang/` with the same structure as the existing language-specific directories; it is probably easiest to copy one of them.
 
-2) The file `config.cfg` lists the spaCy models for which you wish to generate Coreferee models. You will need to specify a [separate vectors model](#model-performance) for any of the spaCy models that lack vectors or context-dependent tensors of their own — see the English `config.cfg` for an example. Each config entry specifies a minimum (`from_version`) and maximum (`to_version`) spaCy model version number that the generated Coreferee model will support. During development, both numbers will normally refer to a single version number. Later, when an updated spaCy model version is brought out, testing will be required to see whether the existing Coreferee model still supports the new spaCy model version. If so, the maximum version number can be increased; if not, a new config entry will be necessary to accommodate the new Coreferee model that will then be required.
+2) The file `config.cfg` lists the spaCy models for which you wish to generate coreferencer models. You will need to specify a [separate vectors model](#model-performance) for any of the spaCy models that lack vectors or context-dependent tensors of their own — see the English `config.cfg` for an example. Each config entry specifies a minimum (`from_version`) and maximum (`to_version`) spaCy model version number that the generated coreferencer model will support. During development, both numbers will normally refer to a single version number. Later, when an updated spaCy model version is brought out, testing will be required to see whether the existing coreferencer model still supports the new spaCy model version. If so, the maximum version number can be increased; if not, a new config entry will be necessary to accommodate the new coreferencer model that will then be required.
 
 3) The file `rules.py` in the main code directory contains an abstract class `RulesAnalyzer` that must be implemented by a class `LanguageSpecificRulesAnalyzer` within a file called  `language_specific_rules.py` in each language-specific directory. The abstract class `RulesAnalyzer` contains docstrings that specify for each abstract property and method the contract to which implementing classes should adhere. Looking at the existing language-specific rules is also likely to be helpful. The method `is_potential_anaphor()` is normally the most work to create: here it is probably worth looking at the existing English method for languages with natural gender or at the existing German method for languages with grammatical gender. (Polish has an unusually complex gender system, so the Polish example is unlikely to be helpful even as a basis for working with other Slavonic languages.)
 
@@ -494,27 +494,27 @@ The steps involved are:
 
 5) Male and female names are managed on a cross-linguistic basis because there is no reason why one would not want e.g. a German female name to be recognised within an English text. Names are automatically made available to all `RulesAnalyzer` implementations as properties `self.male_names`, `self.female_names`, `self.exclusively_male_names` and `self.exclusively_female_names`. If you can locate a suitable names list for the language you are working on that is available under a suitable license, add the attribution to the `LICENSE` file under `common/` and merge your names into the two files. Please tidy up the result so that the files are free of duplicates and in alphabetical order.
 
-6) Create a language-specific directory under `tests/` with a file `test_rules_<ISO 639-1>.py` to test the rules you have written in 3-5). Although one of the corresponding files for one of the existing languages is likely to be the best starting point, you should also be sure to test any extra features specific to the language you are working on. The test tooling is designed to run each test against all spaCy models specified in `config.cfg`. At this stage in development, you will need to add temporarily a parameter `add_coreferee=False` to the call to `get_nlps()` in the `setUp()` method. Otherwise, all tests will fail because the test tooling will attempt to add the as yet non-existent Coreferee model to the pipe.
+6) Create a language-specific directory under `tests/` with a file `test_rules_<ISO 639-1>.py` to test the rules you have written in 3-5). Although one of the corresponding files for one of the existing languages is likely to be the best starting point, you should also be sure to test any extra features specific to the language you are working on. The test tooling is designed to run each test against all spaCy models specified in `config.cfg`. At this stage in development, you will need to add temporarily a parameter `add_coreferencer=False` to the call to `get_nlps()` in the `setUp()` method. Otherwise, all tests will fail because the test tooling will attempt to add the as yet non-existent coreferencer model to the pipe.
 
 7) Some tests may fail with one of the smaller spaCy models because it produces incorrect syntactic representations rather than because of any issue with your rule code. For such cases, a parameter `excluded_nlps` can be specified within a test method to prevent it from being executed with specific spaCy models.
 
 8) Locate a training corpus or corpora. Again, you should make sure that the resulting models can be published under the Apache 2 license. Add new loader class(es) for the corpus or corpora to the existing loader classes in the `train/loaders.py` file. Loader classes must implement the `GenericLoader` abstract class that is located at the top of this file. The job of a loader is to read a specific training corpus format and to create and annotate spaCy documents with coreferences marked within corpora of that format. All the data for a single training run should be placed in a single directory; if there are multiple types of training data loaded by different loaders, each loader will need to be able to recognise the data it is required to read by examining the names of the files within the directory. It is worth spending some time checking with `print()` statements that the loaders annotate as expected, otherwise the training step that follows has little chance of success!
 
-9) You are now ready to begin training. The training command must be issued from the `coreferee/` root directory. Coreferee will place a zip file into `<log-dir>`. Alongside the accuracy for each model, the files in the zip file show the coreference chains produced for each test document as well as a list of incorrect annotations where the Coreferee interpretation differed from the one specified by the training corpus author — information that is invaluable for debugging and rules improvement. As an example, the training command for English is:
+9) You are now ready to begin training. The training command must be issued from the `coreferencer/` root directory. coreferencer will place a zip file into `<log-dir>`. Alongside the accuracy for each model, the files in the zip file show the coreference chains produced for each test document as well as a list of incorrect annotations where the coreferencer interpretation differed from the one specified by the training corpus author — information that is invaluable for debugging and rules improvement. As an example, the training command for English is:
 
 ```
-python3 -m coreferee train --lang en --loader ParCorLoader,LitBankANNLoader --data <training-data-dir> --log <log-dir>
+python3 -m coreferencer train --lang en --loader ParCorLoader,LitBankANNLoader --data <training-data-dir> --log <log-dir>
 ```
 
-10) Once you are happy with your models, install them. The command must be issued from the `coreferee/` root directory, otherwise Coreferee will attempt to download the models from GitHub where they are not yet present:
+10) Once you are happy with your models, install them. The command must be issued from the `coreferencer/` root directory, otherwise coreferencer will attempt to download the models from GitHub where they are not yet present:
 
 ```
-python3 -m coreferee install <ISO 639-1>
+python3 -m coreferencer install <ISO 639-1>
 ```
 
-11) Before you attempt any regression tests that involve running Coreferee as part of the spaCy pipe, you must remove the `add_coreferee=False` parameter you added above. A setup where the parameter is present in one test file but absent in the other test file will not work because the spaCy models are loaded once per test run.
+11) Before you attempt any regression tests that involve running coreferencer as part of the spaCy pipe, you must remove the `add_coreferencer=False` parameter you added above. A setup where the parameter is present in one test file but absent in the other test file will not work because the spaCy models are loaded once per test run.
 
-12) Again using one of the existing languages as an starting point, create a `test_smoke_tests_<ISO 639-1>.py` file in your test directory. The smoke tests are designed to make sure that the basic features of Coreferee are working properly for the language in question and should also cover any features that have posed a particular challenge while developing the rules.
+12) Again using one of the existing languages as an starting point, create a `test_smoke_tests_<ISO 639-1>.py` file in your test directory. The smoke tests are designed to make sure that the basic features of coreferencer are working properly for the language in question and should also cover any features that have posed a particular challenge while developing the rules.
 
 13) Run `pylint` on your `language_specific_rules.py`. Obviously there is no need to achieve a perfect score, but issues that can be easily remedied like overlong lines should be addressed.
 
@@ -525,11 +525,11 @@ python3 -m coreferee install <ISO 639-1>
 <a id="adding-support-for-a-custom-spaCy-model"></a>
 ### 5. Adding support for a custom spaCy model
 
-If you are using a custom spaCy model, you should generate a corresponding custom Coreferee model. Use points 2), 8), 9) and 10) from the [preceding section](#adding-support-for-a-new-language) as a guide. If you do not have your own training data, you can use the [same training data](#model-performance) that was used to generate the standard Coreferee models.
+If you are using a custom spaCy model, you should generate a corresponding custom coreferencer model. Use points 2), 8), 9) and 10) from the [preceding section](#adding-support-for-a-new-language) as a guide. If you do not have your own training data, you can use the [same training data](#model-performance) that was used to generate the standard coreferencer models.
 
 The language-specific rules expect specific entity tags as 'magic values'. This is unfortunate but there is no obvious alternative solution because there is no way of knowing which entities a new tag might refer to. The best advice is to use the same entity tags in your custom model as are used in the standard spaCy models when referring to similar entity classes.
 
-For many entity tags, the impact will be minimal if you cannot adhere to this, but what is crucial is that you use the `PERSON` and `PER` tags to refer to people in English and German respectively. If this is not possible, change the language-specific-rule code and reinstall Coreferee locally (`python -m pip install .` from the root directory).
+For many entity tags, the impact will be minimal if you cannot adhere to this, but what is crucial is that you use the `PERSON` and `PER` tags to refer to people in English and German respectively. If this is not possible, change the language-specific-rule code and reinstall coreferencer locally (`python -m pip install .` from the root directory).
 
 <a id="version-history"></a>
 #### 6 Version history
@@ -555,7 +555,7 @@ The initial open-source version.
 <a id="version-111"></a>
 ##### 6.4 Version 1.1.1
 
-- Changed the dependencies to allow Coreferee to run on the Apple M1 chipset
+- Changed the dependencies to allow coreferencer to run on the Apple M1 chipset
 - Sorted out a problem with the supported spaCy versions
 - Improved some of the tests
 
@@ -567,10 +567,10 @@ The initial open-source version.
 <a id="open-issues"></a>
 ### 7. Open issues / requests for assistance
 
-1) At present Coreferee uses Keras with TensorFlow, which leads to the limitation that `nlp.pipe()` cannot be called with `n_process > 1` with forked processes. It would be greatly preferable if Coreferee could be converted to use Thinc instead: this would get rid of this limitation and generally fit much better into the spaCy ecosystem.
+1) At present coreferencer uses Keras with TensorFlow, which leads to the limitation that `nlp.pipe()` cannot be called with `n_process > 1` with forked processes. It would be greatly preferable if coreferencer could be converted to use Thinc instead: this would get rid of this limitation and generally fit much better into the spaCy ecosystem.
 
-2) Because optimising parsing speed was not a priority in the [project within which Coreferee came into being](#background-information), Coreferee is written purely in Python; it would be helpful if somebody could convert it to Cython.
+2) Because optimising parsing speed was not a priority in the [project within which coreferencer came into being](#background-information), coreferencer is written purely in Python; it would be helpful if somebody could convert it to Cython.
 
-3) There are almost certainly changes to the inputs and structure of the neural ensemble that would lead to improvements in accuracy, both cross-linguistically and for specific languages. The only caveat to bear in mind when trying out changes is that it should be possible for someone who does not understand neural networks to write rules for a new language. This means that Coreferee should detect necessary differences in the neural network behaviour between languages automatically rather than requiring the trainer to configure them.
+3) There are almost certainly changes to the inputs and structure of the neural ensemble that would lead to improvements in accuracy, both cross-linguistically and for specific languages. The only caveat to bear in mind when trying out changes is that it should be possible for someone who does not understand neural networks to write rules for a new language. This means that coreferencer should detect necessary differences in the neural network behaviour between languages automatically rather than requiring the trainer to configure them.
 
-4) It would be useful if somebody could find a way of benchmarking Coreferee against other coreference resolution solutions, especially for English. One problem this would probably present is that using a benchmark necessitates a normative scope where a system aims to find exactly those types of coreference marked within the benchmark corpus, whereas the scope of Coreferee was determined by project requirements.
+4) It would be useful if somebody could find a way of benchmarking coreferencer against other coreference resolution solutions, especially for English. One problem this would probably present is that using a benchmark necessitates a normative scope where a system aims to find exactly those types of coreference marked within the benchmark corpus, whereas the scope of coreferencer was determined by project requirements.

@@ -3,11 +3,11 @@ from typing import List
 from pathlib import Path
 from spacy.tokens import Doc
 
-import coreferee
+import coreferencer
 import spacy
 
 nlp = spacy.load('pl_core_news_lg')
-nlp.add_pipe('coreferee')
+nlp.add_pipe('coreferencer')
 
 
 class MentionEvaluator:
@@ -62,7 +62,7 @@ def mentions_from_doc(doc: Doc) -> List[str]:
     return mentions
 
 
-def eval_coreferee(test_dir: Path):
+def eval_coreferencer(test_dir: Path):
     me = MentionEvaluator()
     for p in test_dir.iterdir():
         print(p)
@@ -103,7 +103,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 print(
-    eval_coreferee(
+    eval_coreferencer(
         Path(args.test_dir_path)
     )
 )

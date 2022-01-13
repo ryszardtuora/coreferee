@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from coreferee.test_utils import get_nlps
+from coreferencer.test_utils import get_nlps
 
 class CommonAnnotationTest(unittest.TestCase):
 

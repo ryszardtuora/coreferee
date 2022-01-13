@@ -44,7 +44,7 @@ class TrainingManager:
         loader_classnames = loader_classes.split(',')
         self.loaders = []
         for loader_classname in loader_classnames:
-            class_ = getattr(sys.modules['coreferee.training.loaders'], loader_classname)
+            class_ = getattr(sys.modules['coreferencer.training.loaders'], loader_classname)
             self.loaders.append(class_())
         self.lang = lang
         self.models_dirname = os.sep.join((self.file_system_root, '..', 'models', lang))

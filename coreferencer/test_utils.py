@@ -28,18 +28,18 @@ def debug_structures(doc:Doc):
 language_to_nlps = {}
 lock = Lock()
 
-def get_nlps(language:str, *, add_coreferee:bool=True) -> list:
+def get_nlps(language:str, *, add_coreferencer:bool=True) -> list:
     """ Returns a list of *nlp* objects to use when testing the functionality for *language*.
         The list contains the latest versions of the Spacy models named in the config file.
-        Note that if this method is called with *add_coreferee=False*, this setting will apply
-        to all future calls within the same process space. This means that *add_coreferee=False*
+        Note that if this method is called with *add_coreferencer=False*, this setting will apply
+        to all future calls within the same process space. This means that *add_coreferencer=False*
         is only appropriate during development of rules tests and before any smoke tests are
         required."""
     with lock:
         if language not in language_to_nlps:
             relative_config_filename = sep.join(('lang', language,
                 'config.cfg'))
-            if not pkg_resources.resource_exists('coreferee', relative_config_filename):
+            if not pkg_resources.resource_exists('coreferencer', relative_config_filename):
                 raise LanguageNotSupportedError(language)
             absolute_config_filename = pkg_resources.resource_filename(__name__,
                 relative_config_filename)
@@ -54,8 +54,8 @@ def get_nlps(language:str, *, add_coreferee:bool=True) -> list:
                 # assumption, but if it no longer applies this code will need to be changed in the
                 # future.
                 nlp = spacy.load(model)
-                if add_coreferee:
-                    nlp.add_pipe('coreferee')
+                if add_coreferencer:
+                    nlp.add_pipe('coreferencer')
                 nlps.append(nlp)
             nlps = sorted(nlps, key=lambda nlp: (nlp.meta['name'], nlp.meta['version']))
             language_to_nlps[language] = nlps

@@ -29,13 +29,13 @@ from .errors import LanguageNotSupportedError, ModelNotSupportedError, \
     VectorsModelNotInstalledError, VectorsModelHasWrongVersionError, \
     MultiprocessingParsingNotSupportedError
 
-COMMON_MODELS_PACKAGE_NAMEPART = 'coreferee_model_'
+COMMON_MODELS_PACKAGE_NAMEPART = 'coreferencer_model_'
 
 FEATURE_TABLE_FILENAME = 'feature_table.bin'
 
 KERAS_MODEL_FILENAME = 'keras_ensemble.h5'
 
-class CorefereeManager:
+class CoreferencerManager:
 
     @staticmethod
     def get_annotator(nlp: Language) -> Annotator:
@@ -80,7 +80,7 @@ class CorefereeManager:
                 except ModuleNotFoundError:
                     print(''.join(("Model could not be loaded for config entry '",
                         config_entry_name, "' If models exist for language '", nlp.meta['lang'],
-                        "', load them with the command 'python -m coreferee install ",
+                        "', load them with the command 'python -m coreferencer install ",
                         nlp.meta['lang'], "'.")))
                     raise ModelNotSupportedError(''.join((nlp.meta['lang'], '_', nlp.meta['name'],
                         ' version ', nlp.meta['version'])))
@@ -95,12 +95,12 @@ class CorefereeManager:
         raise ModelNotSupportedError(''.join((nlp.meta['lang'], '_', nlp.meta['name'],
             ' version ', nlp.meta['version'])))
 
-@Language.factory("coreferee")
-class CorefereeBroker:
+@Language.factory("coreferencer")
+class CoreferencerBroker:
     def __init__(self, nlp:Language, name:str):
         self.nlp = nlp
         self.pid = os.getpid()
-        self.annotator = CorefereeManager().get_annotator(nlp)
+        self.annotator = CoreferencerManager().get_annotator(nlp)
 
     def __call__(self, doc:Doc) -> Doc:
         if os.getpid() != self.pid:
@@ -122,9 +122,9 @@ class CorefereeBroker:
     def __setstate__(self, meta):
         nlp_name = '_'.join((meta['lang'], meta['name']))
         self.nlp = spacy.load(nlp_name)
-        self.annotator = CorefereeManager().get_annotator(self.nlp)
+        self.annotator = CoreferencerManager().get_annotator(self.nlp)
         self.pid = os.getpid()
-        CorefereeBroker.set_extensions()
+        CoreferencerBroker.set_extensions()
 
     @staticmethod
     def set_extensions():

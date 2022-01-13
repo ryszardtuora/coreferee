@@ -16,12 +16,12 @@ import unittest
 import warnings
 import numpy as np
 import spacy
-import coreferee
-from coreferee.rules import RulesAnalyzerFactory
-from coreferee.training.model import ModelGenerator
-from coreferee.test_utils import get_nlps
-from coreferee.tendencies import TendenciesAnalyzer
-from coreferee.data_model import Mention
+import coreferencer
+from coreferencer.rules import RulesAnalyzerFactory
+from coreferencer.training.model import ModelGenerator
+from coreferencer.test_utils import get_nlps
+from coreferencer.tendencies import TendenciesAnalyzer
+from coreferencer.data_model import Mention
 
 class CommonTendenciesTest(unittest.TestCase):
 

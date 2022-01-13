@@ -19,7 +19,7 @@ from queue import Queue
 from threading import Thread
 import spacy
 from spacy.tokens import Doc
-from coreferee.test_utils import get_nlps
+from coreferencer.test_utils import get_nlps
 
 NUMBER_OF_THREADS = 50
 NUMBER_OF_PROCESSES = 2
@@ -93,7 +93,7 @@ class CommonUtilsTest(unittest.TestCase):
     def test_processing_in_pipe_2_cpu(self):
         if os.name == 'nt': # only works with spawning (not forking) at present
             nlp = spacy.load('en_core_web_sm')
-            nlp.add_pipe('coreferee')
+            nlp.add_pipe('coreferencer')
             doc_texts = (['Peter told Paul he was dissatisfied.', 'Peter said he was dissatisfied'])
             docs = list(nlp.pipe(doc_texts, n_process=2))
             self.assertEqual('[0: [0], [3]]', str(docs[0]._.coref_chains))
@@ -129,7 +129,7 @@ class CommonUtilsTest(unittest.TestCase):
     def test_use_of_data_model_in_multiprocessing_context(self):
 
         nlp = spacy.load('en_core_web_sm')
-        nlp.add_pipe('coreferee')
+        nlp.add_pipe('coreferencer')
         reference_worker = Worker()
         manager = Manager()
         input_queues = [m_Queue() for i in range(NUMBER_OF_PROCESSES)]
