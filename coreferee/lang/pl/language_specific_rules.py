@@ -45,8 +45,8 @@ class LanguageSpecificRulesAnalyzer(RulesAnalyzer):
                     'drużyna','partia','instytucja','stowarzyszenie',
                     'spółdzielnia','instytut', 'urząd'],
         'time' : ['chwila','godzina','moment','minuta', 'pora', 'czas'],
-        'date' : ['rok','czas','dzień','miesiąc','okres','tydzień','wiek',
-                  'święto', 'noc','data','termin','pora'],
+        'date' : ['rok','dzień','miesiąc','okres','tydzień','wiek',
+                  'święto', 'noc','data','termin'],
     }
 
 
