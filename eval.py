@@ -11,18 +11,20 @@ nlp.add_pipe('coreferee')
 
 
 class MentionEvaluator:
-    def __init__(self):
+    def __init__(self, verbose=False):
         self.tp, self.fp, self.fn = 0, 0, 0
+        self.verbose = verbose
 
     def update(self, predicted_mentions, gold_mentions):
-        print({
-            'p': predicted_mentions,
-            'g': gold_mentions,
-            'intersect': predicted_mentions & gold_mentions,
-            'predicted - gold': predicted_mentions - gold_mentions
-        })
         predicted_mentions = set(predicted_mentions)
         gold_mentions = set(gold_mentions)
+        if self.verbose:
+            print({
+                'p': predicted_mentions,
+                'g': gold_mentions,
+                'intersect': predicted_mentions & gold_mentions,
+                'predicted - gold': predicted_mentions - gold_mentions
+            })
         self.tp += len(predicted_mentions & gold_mentions)
         self.fp += len(predicted_mentions - gold_mentions)
         self.fn += len(gold_mentions - predicted_mentions)
